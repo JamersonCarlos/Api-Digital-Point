@@ -27,6 +27,8 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/auth/login").permitAll()
                 .requestMatchers("/auth/register").permitAll()
+                .requestMatchers("/auth/verify-token").permitAll()
+                .requestMatchers("/historico/locais").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
