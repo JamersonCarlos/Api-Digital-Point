@@ -24,4 +24,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleTokenInvalidException(TokenInvalidException  ex) { 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage()); 
     }
+
+    @ExceptionHandler(NotExistRelationalAndUserException.class)
+    public ResponseEntity<String> handleNotExistRelationalException(NotExistRelationalAndUserException ex) { 
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(NotRegisterMatriculaUser.class)
+    public ResponseEntity<String> handleNotRegisterMatriculaUserException(NotRegisterMatriculaUser ex) { 
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 }
