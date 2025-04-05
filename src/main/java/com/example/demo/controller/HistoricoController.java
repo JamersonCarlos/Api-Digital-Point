@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.catalina.connector.Response;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ import com.example.demo.model.HistoricoPontos;
 import com.example.demo.model.LocaisTrabalho;
 import com.example.demo.service.HistoricoService;
 
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/historico")
