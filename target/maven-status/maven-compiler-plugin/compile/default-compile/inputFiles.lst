@@ -5,6 +5,7 @@ C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\ex
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\controller\AuthenticationController.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\controller\HistoricoController.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\controller\UserController.java
+C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\controller\WorkDetailsController.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\DemoApplication.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\AuthenticationDTO.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\BaterPontoDTO.java
@@ -12,7 +13,6 @@ C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\ex
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\LoginResponseDTO.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\RegisterDTO.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\ResponseHistoricoAllUserDTO.java
-C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\ResponseSubject.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\ValidateTokenDTO.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\GlobalExceptionHandler.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\NotExistRelationalAndUserException.java
@@ -30,4 +30,5 @@ C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\ex
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\repository\UserWorkInfoRepository.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\AuthorizationService.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\HistoricoService.java
+C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\WorkDetailsService.java
 C:\Users\unive\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\VOs\ResultBaterPontosVO.java
