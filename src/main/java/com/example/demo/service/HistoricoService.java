@@ -70,4 +70,15 @@ public class HistoricoService {
         }).orElseThrow(() -> new RuntimeException("Usuário não encontrado!")), ResponseHistoricoAllUserDTO.class);
     }
 
+    public boolean anularPonto(Integer id) { 
+        Optional<HistoricoPontos> pontoOptional = historicoPontosRepository.findById(id);
+    
+        if (pontoOptional.isPresent()) {
+            historicoPontosRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

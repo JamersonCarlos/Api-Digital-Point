@@ -50,7 +50,7 @@ public class AuthenticationController {
             return ResponseEntity.ok(new LoginResponseDTO(token));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new ErrorResponseDTO("Credenciais inválidas. Verifique seu login e senha."));
+                .body(new ErrorResponseDTO("Credenciais incorretas. Verifique seu login e senha."));
         }
     }
 
