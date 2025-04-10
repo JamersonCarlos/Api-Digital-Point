@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.VOs.SolicitacaoVO;
 import com.example.demo.dto.SolicitacaoDTO;
+import com.example.demo.model.HistoricoPontos;
 import com.example.demo.model.SolicitacoesUser;
 import com.example.demo.model.User;
+import com.example.demo.repository.HistoricoPontosRepository;
 import com.example.demo.repository.SolicitacoesUserRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -23,6 +25,9 @@ public class SolicitacoesService {
         private SolicitacoesUserRepository solicitacoesUserRepository; 
 
         @Autowired
+        private HistoricoPontosRepository historicoPontosRepository; 
+
+        @Autowired
         private UserRepository userRepository; 
 
         @Autowired 
@@ -30,12 +35,17 @@ public class SolicitacoesService {
     
         public SolicitacaoVO abrirSolicitacao(SolicitacaoDTO solicitacao, String matricula) { 
                 final User user = userRepository.findByLogin(matricula);
-                final SolicitacoesUser solicitacoesUser = new SolicitacoesUser(solicitacao.anulacao_ponto(), solicitacao.alterar_horario_entrada(), solicitacao.alterar_horario_saida(), solicitacao.novo_horario_entrada(), solicitacao.novo_horario_saida(), user, LocalDateTime.now());
-                return modelMapper.map(solicitacoesUserRepository.save(solicitacoesUser), SolicitacaoVO.class);
+                final Optional<HistoricoPontos> historicoPontos = historicoPontosRepository.findById(solicitacao.id_ponto());
+                if(historicoPontos.isPresent()) { 
+                        final SolicitacoesUser solicitacoesUser = new SolicitacoesUser(solicitacao.alterar_horario_entrada(), solicitacao.alterar_horario_saida(), solicitacao.novo_horario_entrada(), solicitacao.novo_horario_saida(), user, LocalDateTime.now(), historicoPontos.get());
+                        return modelMapper.map(solicitacoesUserRepository.save(solicitacoesUser), SolicitacaoVO.class);
+                }
+                return null; 
+                
         }
 
-        public List<SolicitacaoVO> getSolicitacoes(String matricula) { 
-                return solicitacoesUserRepository.findByUser_Login(matricula).stream().map(t -> modelMapper.map(t, SolicitacaoVO.class)).collect(Collectors.toList());
+        public List<SolicitacaoVO> getSolicitacoes(Integer id) { 
+                return solicitacoesUserRepository.findAllByHistoricoPontos_Id(id).stream().map(t -> modelMapper.map(t, SolicitacaoVO.class)).collect(Collectors.toList());
         }
 
         public Optional<SolicitacoesUser> getOneSolicitacao(int idSolicitacao) { 
