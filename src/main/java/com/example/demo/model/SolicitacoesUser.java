@@ -18,13 +18,19 @@ public class SolicitacoesUser {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private int id; 
 
-        private boolean anulacao_ponto; 
+
         private boolean alterar_horario_entrada; 
         private boolean alterar_horario_saida; 
         private LocalDateTime novo_horario_entrada; 
         private LocalDateTime novo_horario_saida;
         private LocalDateTime created_at; 
-        private LocalDateTime concluida_at;         
+        private LocalDateTime concluida_at;  
+        
+        
+        @ManyToOne
+        @JoinColumn(name = "id_ponto", referencedColumnName = "id")
+        private HistoricoPontos historicoPontos; 
+        
 
         @ManyToOne
         @JoinColumn(name = "user_login", referencedColumnName = "login")
@@ -33,23 +39,19 @@ public class SolicitacoesUser {
         public SolicitacoesUser() {
         }
 
-        public SolicitacoesUser(boolean anulacao_ponto, boolean alterar_horario_entrada, boolean alterar_horario_saida,
-                        LocalDateTime novo_horario_entrada, LocalDateTime novo_horario_saida, User user, LocalDateTime created_at) {
-                this.anulacao_ponto = anulacao_ponto;
+        public SolicitacoesUser(boolean alterar_horario_entrada, boolean alterar_horario_saida,
+                        LocalDateTime novo_horario_entrada, LocalDateTime novo_horario_saida, User user, LocalDateTime created_at, HistoricoPontos historicoPontos) {
+  
                 this.alterar_horario_entrada = alterar_horario_entrada;
                 this.alterar_horario_saida = alterar_horario_saida;
                 this.novo_horario_entrada = novo_horario_entrada;
                 this.novo_horario_saida = novo_horario_saida;
+                this.historicoPontos = historicoPontos; 
+                this.user = user;
                 this.created_at = created_at; 
         }
 
 
-        public boolean isAnulacao_ponto() {
-                return anulacao_ponto;
-        }
-        public void setAnulacao_ponto(boolean anulacao_ponto) {
-                this.anulacao_ponto = anulacao_ponto;
-        }
         public boolean isAlterar_horario_entrada() {
                 return alterar_horario_entrada;
         }
@@ -105,6 +107,14 @@ public class SolicitacoesUser {
 
         public void setConcluida_at(LocalDateTime concluida_at) {
                 this.concluida_at = concluida_at;
+        }
+
+        public HistoricoPontos getHistoricoPontos() {
+                return historicoPontos;
+        }
+
+        public void setHistoricoPontos(HistoricoPontos historicoPontos) {
+                this.historicoPontos = historicoPontos;
         } 
 
         
