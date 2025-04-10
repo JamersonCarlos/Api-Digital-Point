@@ -1,7 +1,5 @@
 package com.example.demo.model;
-
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +23,7 @@ public class SolicitacoesUser {
         private LocalDateTime novo_horario_saida;
         private LocalDateTime created_at; 
         private LocalDateTime concluida_at;  
-        
+
         
         @ManyToOne
         @JoinColumn(name = "id_ponto", referencedColumnName = "id")
