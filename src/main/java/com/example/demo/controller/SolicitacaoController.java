@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.VOs.SolicitacaoVO;
 import com.example.demo.config.security.TokenService;
 import com.example.demo.dto.SolicitacaoDTO;
-import com.example.demo.model.SolicitacoesUser;
 import com.example.demo.service.SolicitacoesService;
 
 @RestController
@@ -49,6 +48,11 @@ public class SolicitacaoController {
                 return ResponseEntity.ok().body(solicitacoesService.getSolicitacoes(id));
         }
 
+        @DeleteMapping("/ponto/{id}")
+        public ResponseEntity<?>  deleteOneSolicitacao(@PathVariable int id) { 
+                solicitacoesService.deleteOneSolicitacao(id);
+                return ResponseEntity.ok().build();
+        }
 
      
         

@@ -51,4 +51,9 @@ public class SolicitacoesService {
         public Optional<SolicitacoesUser> getOneSolicitacao(int idSolicitacao) { 
                 return solicitacoesUserRepository.findById(idSolicitacao);
         }
+        
+
+        public void deleteOneSolicitacao(int idSolicitacao) { 
+                solicitacoesUserRepository.deleteById(idSolicitacao);
+        }
 }
