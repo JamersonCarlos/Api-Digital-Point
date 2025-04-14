@@ -26,6 +26,7 @@ public class SecurityConfigurations {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/auth/login").permitAll()
+                .requestMatchers("/auth/login/admin").permitAll()
                 .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/auth/verify-token").permitAll()
                 .requestMatchers("/historico/locais").permitAll()

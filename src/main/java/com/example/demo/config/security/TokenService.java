@@ -21,8 +21,11 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret; 
 
-    private Instant genExpirationDate() { 
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    private Instant genExpirationDate(User user) { 
+        if(user.getRole().getRole() == "USER") { 
+            return LocalDateTime.now().plusHours(12).toInstant(ZoneOffset.of("-03:00"));
+        } 
+        return LocalDateTime.now().plusWeeks(1).toInstant(ZoneOffset.of("-03:00"));
     }
 
     public String generateToken(User user) { 
@@ -31,7 +34,7 @@ public class TokenService {
             String token = JWT.create()
                 .withIssuer("auth-api")
                 .withSubject(user.getLogin())
-                .withExpiresAt(genExpirationDate())
+                .withExpiresAt(genExpirationDate(user))
                 .sign(algorithm);
             return token; 
         } catch (JWTCreationException e) {

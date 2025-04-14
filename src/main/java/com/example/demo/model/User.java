@@ -33,7 +33,7 @@ public class User implements UserDetails {
 
     @OneToOne
     @JoinColumn(name = "login", referencedColumnName = "matricula", insertable = false, updatable = false)
-    private UserWorkInfo userWorkInfo;
+    private Funcionario userWorkInfo;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HistoricoPontos> historicoPontos;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.config.security.TokenService;
+import com.example.demo.dto.AuthenticationAdminDTO;
 import com.example.demo.dto.AuthenticationDTO;
 import com.example.demo.dto.ErrorResponseDTO;
 import com.example.demo.dto.LoginResponseDTO;
@@ -22,8 +23,9 @@ import com.example.demo.exception.TokenInvalidException;
 import com.example.demo.exception.UserAlreadyExistsException;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
+import com.example.demo.repository.FuncionarioRepository;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.UserWorkInfoRepository;
+
 
 @RestController
 @RequestMapping("auth")
@@ -33,7 +35,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired 
-    private UserWorkInfoRepository userWorkInfoRepository; 
+    private FuncionarioRepository funcionarioRepository; 
 
     @Autowired 
     private UserRepository userRepository;
@@ -54,10 +56,23 @@ public class AuthenticationController {
         }
     }
 
+    @PostMapping("/login/admin")
+    public ResponseEntity<?> loginAdmin(@RequestBody AuthenticationAdminDTO data) { 
+        try {
+            var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
+            var auth = this.authenticationManager.authenticate(usernamePassword);
+            var token = tokenService.generateToken((User) auth.getPrincipal());
+            return ResponseEntity.ok(new LoginResponseDTO(token));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponseDTO("Credenciais incorretas. Verifique seu telefone e senha."));
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO data) {
         if(this.userRepository.findByLogin(data.login()) != null) throw new UserAlreadyExistsException("O usuário com login '" + data.login() + "' já existe."); 
-        if(this.userWorkInfoRepository.findByMatricula(data.login()) == null) throw new NotRegisterMatriculaUser("A matricula " + data.login() + " não está cadastrada");
+        if(this.funcionarioRepository.findByMatricula(data.login()) == null) throw new NotRegisterMatriculaUser("A matricula " + data.login() + " não está cadastrada");
 
         //Criptografando a senha do usuário e salvando no banco de dados
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); 

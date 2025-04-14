@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.config.security.TokenService;
-import com.example.demo.service.WorkDetailsService;
+import com.example.demo.service.FuncionarioService;
 
 @RestController
 @RequestMapping("/trabalho")
-public class WorkDetailsController {    
+public class FuncionarioController {    
         
         @Autowired
-        private WorkDetailsService workDetailsService; 
+        private FuncionarioService funcionarioService; 
 
         @Autowired 
         private TokenService tokenService; 
@@ -26,7 +26,7 @@ public class WorkDetailsController {
                         token = token.substring(7);
                     }
                     String subject = tokenService.validateToken(token);
-                return ResponseEntity.ok().body(workDetailsService.getDetails(subject));
+                return ResponseEntity.ok().body(funcionarioService.getDetails(subject));
         }
 
 }
