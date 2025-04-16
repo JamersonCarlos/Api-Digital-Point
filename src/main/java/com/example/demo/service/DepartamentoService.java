@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.VOs.DepartamentoVO;
 import com.example.demo.VOs.SetorDepartamentoVO;
 import com.example.demo.model.Departamento;
-import com.example.demo.model.Funcionario;
 import com.example.demo.model.SetorDepartamento;
 import com.example.demo.repository.DepartamentoRepository;
 import com.example.demo.repository.FuncionarioRepository;

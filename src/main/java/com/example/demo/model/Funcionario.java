@@ -1,7 +1,4 @@
 package com.example.demo.model;
-
-import org.modelmapper.internal.bytebuddy.implementation.bind.annotation.Default;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

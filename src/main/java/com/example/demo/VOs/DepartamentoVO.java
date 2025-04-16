@@ -2,8 +2,6 @@ package com.example.demo.VOs;
 
 import java.util.List;
 
-import com.example.demo.model.SetorDepartamento;
-
 public class DepartamentoVO {
         private int id;
 
