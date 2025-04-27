@@ -15,7 +15,6 @@ public class DepartamentoVO {
         private int qtdSetores; 
         private List<SetorDepartamentoVO> setores;
         
-        
 
         public DepartamentoVO() {
         }
