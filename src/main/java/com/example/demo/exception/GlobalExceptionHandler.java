@@ -34,4 +34,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleNotRegisterMatriculaUserException(NotRegisterMatriculaUser ex) { 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler(MatriculaJaExisteException.class)
+    public ResponseEntity<String> handleMatriculaJaExisteException(MatriculaJaExisteException ex) { 
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
 }
