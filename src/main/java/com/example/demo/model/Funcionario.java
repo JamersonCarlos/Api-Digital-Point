@@ -1,4 +1,7 @@
 package com.example.demo.model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,138 +12,114 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
-        
-        @Id
-        @Column(unique = true)
-        private String matricula;
-        
-        private int cod_regime; 
-        private int carga_horaria; 
 
-        private double salario;
-        private String telefone; 
-        private String email; 
-        private String sexo; 
+    @Id
+    @Column(unique = true)
+    private String matricula;
 
-        @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
-        private boolean chefe; 
+    private String cod_regime;
+    private int carga_horaria;
 
-        @ManyToOne
-        @JoinColumn(name = "setor_id")
-        private SetorDepartamento setorDepartamento;
-        
-        public Funcionario() {
-        
-        }
+    private double salario;
+    private String telefone;
+    private String email;
+    private String sexo;
 
-        public Funcionario(String matricula, int cod_regime, int carga_horaria, double salario, String telefone,
-                        String email, String sexo, boolean chefe, SetorDepartamento setorDepartamento) {
-                this.matricula = matricula;
-                this.cod_regime = cod_regime;
-                this.carga_horaria = carga_horaria;
-                this.salario = salario;
-                this.telefone = telefone;
-                this.email = email;
-                this.sexo = sexo;
-                this.chefe = chefe;
-                this.setorDepartamento = setorDepartamento;
-        }
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean chefe;
 
+    @ManyToOne
+    @JoinColumn(name = "setor_id")
+    @JsonBackReference
+    private SetorDepartamento setorDepartamento;
 
+    public Funcionario() {
 
+    }
 
-        public String getMatricula() {
-                return matricula;
-        }
+    public Funcionario(String matricula, String cod_regime, int carga_horaria, double salario, String telefone,
+            String email, String sexo, boolean chefe, SetorDepartamento setorDepartamento) {
+        this.matricula = matricula;
+        this.cod_regime = cod_regime;
+        this.carga_horaria = carga_horaria;
+        this.salario = salario;
+        this.telefone = telefone;
+        this.email = email;
+        this.sexo = sexo;
+        this.chefe = chefe;
+        this.setorDepartamento = setorDepartamento;
+    }
 
+    public String getMatricula() {
+        return matricula;
+    }
 
-        public void setMatricula(String matricula) {
-                this.matricula = matricula;
-        }
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
+    public String getCod_regime() {
+        return cod_regime;
+    }
 
-        public int getCod_regime() {
-                return cod_regime;
-        }
+    public void setCod_regime(String cod_regime) {
+        this.cod_regime = cod_regime;
+    }
 
+    public int getCarga_horaria() {
+        return carga_horaria;
+    }
 
-        public void setCod_regime(int cod_regime) {
-                this.cod_regime = cod_regime;
-        }
+    public void setCarga_horaria(int carga_horaria) {
+        this.carga_horaria = carga_horaria;
+    }
 
+    public double getSalario() {
+        return salario;
+    }
 
-        public int getCarga_horaria() {
-                return carga_horaria;
-        }
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
 
+    public String getTelefone() {
+        return telefone;
+    }
 
-        public void setCarga_horaria(int carga_horaria) {
-                this.carga_horaria = carga_horaria;
-        }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
-        public double getSalario() {
-                return salario;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getSexo() {
+        return sexo;
+    }
 
-        public void setSalario(double salario) {
-                this.salario = salario;
-        }
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 
+    public boolean isChefe() {
+        return chefe;
+    }
 
-        public String getTelefone() {
-                return telefone;
-        }
+    public void setChefe(boolean chefe) {
+        this.chefe = chefe;
+    }
 
+    public SetorDepartamento getSetorDepartamento() {
+        return setorDepartamento;
+    }
 
-        public void setTelefone(String telefone) {
-                this.telefone = telefone;
-        }
+    public void setSetorDepartamento(SetorDepartamento setorDepartamento) {
+        this.setorDepartamento = setorDepartamento;
+    }
 
-
-        public String getEmail() {
-                return email;
-        }
-
-
-        public void setEmail(String email) {
-                this.email = email;
-        }
-
-
-        public String getSexo() {
-                return sexo;
-        }
-
-
-        public void setSexo(String sexo) {
-                this.sexo = sexo;
-        }
-
-
-        public boolean isChefe() {
-                return chefe;
-        }
-
-
-        public void setChefe(boolean chefe) {
-                this.chefe = chefe;
-        }
-
-
-        public SetorDepartamento getSetorDepartamento() {
-                return setorDepartamento;
-        }
-
-
-        public void setSetorDepartamento(SetorDepartamento setorDepartamento) {
-                this.setorDepartamento = setorDepartamento;
-        }
-
-
-        
-       
-
-        
 }

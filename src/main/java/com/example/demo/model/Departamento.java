@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import jakarta.persistence.Table;
 public class Departamento {
         
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
         private String nome; 
@@ -35,6 +37,7 @@ public class Departamento {
         private Funcionario chefe;
 
         @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, orphanRemoval = true)
+        @JsonManagedReference
         private List<SetorDepartamento> setores;
 
         public Departamento() {
@@ -113,6 +116,14 @@ public class Departamento {
         public void setChefe(Funcionario chefe) {
                 this.chefe = chefe;
         }
+
+    public List<SetorDepartamento> getSetores() {
+        return setores;
+    }
+
+    public void setSetores(List<SetorDepartamento> setores) {
+        this.setores = setores;
+    }
 
         
 }
