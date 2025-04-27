@@ -25,9 +25,6 @@ public class DepartamentoService {
         SetorDepartamentoRepository setorDepartamentoRepository; 
 
         @Autowired
-        FuncionarioRepository funcionarioRepository; 
-
-        @Autowired
         private ModelMapper modelMapper = new ModelMapper(); 
 
         public DepartamentoVO getOneDepartamento(String matriculaUser) { 

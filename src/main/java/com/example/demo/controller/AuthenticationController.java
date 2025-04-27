@@ -21,6 +21,7 @@ import com.example.demo.dto.ValidateTokenDTO;
 import com.example.demo.exception.NotRegisterMatriculaUser;
 import com.example.demo.exception.TokenInvalidException;
 import com.example.demo.exception.UserAlreadyExistsException;
+import com.example.demo.model.Funcionario;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.FuncionarioRepository;
@@ -71,12 +72,20 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO data) {
+        Role permission = Role.USER;
         if(this.userRepository.findByLogin(data.login()) != null) throw new UserAlreadyExistsException("O usuário com login '" + data.login() + "' já existe."); 
-        if(this.funcionarioRepository.findByMatricula(data.login()) == null) throw new NotRegisterMatriculaUser("A matricula " + data.login() + " não está cadastrada");
+        Funcionario funcionario = funcionarioRepository.findByMatricula(data.login());
+        if(funcionario == null) { 
+            throw new NotRegisterMatriculaUser("A matricula " + data.login() + " não está cadastrada");
+        } else {
+            if(funcionario.isChefe()) { 
+                permission = Role.ADMIN; 
+            }
+        }
 
         //Criptografando a senha do usuário e salvando no banco de dados
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password()); 
-        User newUser = new User(data.name(), data.login(), encryptedPassword, Role.USER);
+        User newUser = new User(data.name(), data.login(), encryptedPassword, permission);
         this.userRepository.save(newUser);
         
         return ResponseEntity.ok().build();

@@ -2,6 +2,9 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,21 +24,22 @@ public class SetorDepartamento {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private int id; 
-
         private String nome; 
 
      
         @OneToMany(mappedBy = "localTrabalho", cascade = CascadeType.REMOVE, orphanRemoval = true)
         private List<LocaisTrabalho> locaisTrabalhos; 
 
-        @OneToMany(mappedBy = "setorDepartamento", cascade = CascadeType.ALL, orphanRemoval = true)
+        @OneToMany(mappedBy = "setorDepartamento", cascade = CascadeType.REMOVE, orphanRemoval = true)
+        @JsonManagedReference
         private List<Funcionario> funcionarios;
 
         @ManyToOne
         @JoinColumn(name = "departamento_id")
+        @JsonBackReference
         private Departamento departamento;
 
-        @OneToOne
+        @ManyToOne
         @JoinColumn(name = "chefe_matricula") // chave estrangeira para a matrícula do funcionário
         private Funcionario chefe;
 
@@ -44,7 +48,6 @@ public class SetorDepartamento {
         public SetorDepartamento() {
         }
 
-        
 
         public SetorDepartamento(String nome, Departamento departamento) {
                 this.nome = nome;
@@ -91,6 +94,14 @@ public class SetorDepartamento {
         public void setChefe(Funcionario chefe) {
                 this.chefe = chefe;
         } 
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
 
         
         
