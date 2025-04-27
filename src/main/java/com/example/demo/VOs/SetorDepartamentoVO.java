@@ -10,7 +10,9 @@ public class SetorDepartamentoVO {
         private String nome; 
         private List<LocaisTrabalho> locaisTrabalhos;
         private List<Funcionario> funcionarios; 
+        private Funcionario chefe;
 
+        
         
         public SetorDepartamentoVO() {
         }
@@ -40,6 +42,14 @@ public class SetorDepartamentoVO {
 
         public void setFuncionarios(List<Funcionario> funcionarios) {
                 this.funcionarios = funcionarios;
+        }
+
+        public Funcionario getChefe() {
+            return chefe;
+        }
+
+        public void setChefe(Funcionario chefe) {
+            this.chefe = chefe;
         } 
 
         
