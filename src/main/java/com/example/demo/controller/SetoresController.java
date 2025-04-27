@@ -1,7 +1,10 @@
 package com.example.demo.controller;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,14 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.SetorDTO;
+import com.example.demo.model.Funcionario;
+import com.example.demo.model.SetorDepartamento;
 import com.example.demo.service.SetoresService;
+
 
 @RestController
 @RequestMapping("setores")
 public class SetoresController {
 
+
         @Autowired 
-        private SetoresService setoresService; 
+        private SetoresService setoresService;
 
 
         @PostMapping("/add")
@@ -30,6 +37,26 @@ public class SetoresController {
                 setoresService.deleteSetor(idSetor);
                 return ResponseEntity.ok().build();
         }
+
+        @GetMapping("/{idSetor}")
+        public ResponseEntity<SetorDepartamento> getSetor(@PathVariable int idSetor) {
+            Optional<SetorDepartamento> setor = setoresService.getSetor(idSetor);
+            if(setor.isPresent()) { 
+                return ResponseEntity.ok().body(setor.get()); 
+            }
+            return ResponseEntity.notFound().build(); 
+        } 
+
+        @PostMapping("/{idSetor}/{matriculaChefe}")
+        public ResponseEntity<Funcionario> setChefeSetor(@PathVariable int idSetor, @PathVariable String matriculaChefe) {
+                Funcionario response = setoresService.setChefeSetor(idSetor, matriculaChefe);
+                if(response != null) { 
+                        return ResponseEntity.ok().body(response);
+                }
+                return ResponseEntity.notFound().build();
+        }
+        
+        
 
 
 
