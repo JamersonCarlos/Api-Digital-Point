@@ -21,6 +21,7 @@ C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\exa
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\SolicitacaoDTO.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\dto\ValidateTokenDTO.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\GlobalExceptionHandler.java
+C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\MatriculaJaExisteException.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\NotExistRelationalAndUserException.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\NotRegisterMatriculaUser.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\exception\TokenInvalidException.java
@@ -46,6 +47,7 @@ C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\exa
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\HistoricoService.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\SetoresService.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\SolicitacoesService.java
+C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\service\UserService.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\VOs\DepartamentoVO.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\VOs\ResultBaterPontosVO.java
 C:\Users\USER\OneDrive\Documentos\GitHub\Api-Digital-Point\src\main\java\com\example\demo\VOs\SetorDepartamentoVO.java
