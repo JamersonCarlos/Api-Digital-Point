@@ -2,9 +2,11 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.VOs.FuncionarioVO;
 import com.example.demo.exception.MatriculaJaExisteException;
 import com.example.demo.model.Funcionario;
 import com.example.demo.model.SetorDepartamento;
@@ -17,12 +19,16 @@ public class FuncionarioService {
 
         @Autowired
         private FuncionarioRepository funcionarioRepository; 
+
+        @Autowired
+        private final ModelMapper modelMapper = new ModelMapper(); 
         
         @Autowired
         private SetorDepartamentoRepository setorDepartamentoRepository; 
 
-        public Funcionario getDetails(String matricula) { 
-                return funcionarioRepository.findByMatricula(matricula);
+        public FuncionarioVO getDetails(String matricula) { 
+                Funcionario funcionario = funcionarioRepository.findByMatricula(matricula);
+                return modelMapper.map(funcionario, FuncionarioVO.class);
         }
         
         public void salvarFuncionario(int idSetor, Funcionario funcionario) { 
@@ -34,6 +40,13 @@ public class FuncionarioService {
 
                 funcionario.setSetorDepartamento(setorFuncionario.get());
                 funcionarioRepository.save(funcionario);
+        }
+
+        public void deleteFuncionario(String matricula) { 
+                Funcionario funcionario = funcionarioRepository.findByMatricula(matricula); 
+                if(funcionario != null) { 
+                        funcionarioRepository.delete(funcionario);
+                }
         }
 
 }

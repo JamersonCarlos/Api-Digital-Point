@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -11,9 +12,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,11 +29,16 @@ public class SetorDepartamento {
         private String nome; 
 
      
-        @OneToMany(mappedBy = "localTrabalho", cascade = CascadeType.REMOVE, orphanRemoval = true)
-        private List<LocaisTrabalho> locaisTrabalhos; 
+        @ManyToMany
+        @JoinTable(
+                name = "setor_local_trabalho",  // Nome da tabela intermediária
+                joinColumns = @JoinColumn(name = "setor_id"),  // Chave estrangeira para SetorDepartamento
+                inverseJoinColumns = @JoinColumn(name = "local_trabalho_id")  // Chave estrangeira para LocaisTrabalho
+        )
+        @JsonManagedReference
+        private List<LocaisTrabalho> locaisTrabalhos = new ArrayList<>();
 
         @OneToMany(mappedBy = "setorDepartamento", cascade = CascadeType.REMOVE, orphanRemoval = true)
-        @JsonManagedReference
         private List<Funcionario> funcionarios;
 
         @ManyToOne
@@ -86,7 +93,7 @@ public class SetorDepartamento {
         public void setLocaisTrabalhos(List<LocaisTrabalho> locaisTrabalhos) {
                 this.locaisTrabalhos = locaisTrabalhos;
         }
-
+  
         public Funcionario getChefe() {
                 return chefe;
         }

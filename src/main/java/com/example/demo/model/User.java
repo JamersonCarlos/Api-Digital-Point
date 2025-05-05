@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,30 +21,32 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User implements UserDetails {
 
     @Id
-    private String login; 
+    private String login;
 
     private String name;
-    private String password; 
-
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToOne
     @JoinColumn(name = "login", referencedColumnName = "matricula", insertable = false, updatable = false)
+    @JsonBackReference
     private Funcionario userWorkInfo;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<HistoricoPontos> historicoPontos;
 
+
     public User() {
-        // Pode deixar vazio ou inicializar algum valor padrão
+
     }
-    
+
     public User(String name, String login, String password, Role role) {
         this.name = name;
         this.login = login;
@@ -75,8 +80,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER")); 
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if (this.role == Role.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
@@ -92,7 +99,20 @@ public class User implements UserDetails {
         this.login = login;
     }
 
-    
+    public Funcionario getUserWorkInfo() {
+        return userWorkInfo;
+    }
 
-    
+    public void setUserWorkInfo(Funcionario userWorkInfo) {
+        this.userWorkInfo = userWorkInfo;
+    }
+
+    public List<HistoricoPontos> getHistoricoPontos() {
+        return historicoPontos;
+    }
+
+    public void setHistoricoPontos(List<HistoricoPontos> historicoPontos) {
+        this.historicoPontos = historicoPontos;
+    }
+
 }

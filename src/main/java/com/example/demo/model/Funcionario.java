@@ -1,12 +1,15 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,8 +33,12 @@ public class Funcionario {
 
     @ManyToOne
     @JoinColumn(name = "setor_id")
-    @JsonBackReference
+    @JsonIgnore
     private SetorDepartamento setorDepartamento;
+
+    @OneToOne(mappedBy = "userWorkInfo")
+    @JsonManagedReference
+    private User user;  
 
     public Funcionario() {
 
@@ -49,6 +56,8 @@ public class Funcionario {
         this.chefe = chefe;
         this.setorDepartamento = setorDepartamento;
     }
+
+    
 
     public String getMatricula() {
         return matricula;
@@ -120,6 +129,14 @@ public class Funcionario {
 
     public void setSetorDepartamento(SetorDepartamento setorDepartamento) {
         this.setorDepartamento = setorDepartamento;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

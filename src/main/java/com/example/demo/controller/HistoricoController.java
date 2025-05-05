@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +60,13 @@ public class HistoricoController {
         String subject = tokenService.validateToken(token);
         return ResponseEntity.ok().body(historicoService.getHistoricoUser(subject).stream().map(this::toHistoricoSummaryModel).collect(Collectors.toList()));
     }
+
+    @GetMapping("/all/{matricula}") 
+    public ResponseEntity<List<ResponseHistoricoAllUserDTO>> historicoPontosMatricula(@PathVariable String matricula) { 
+        return ResponseEntity.ok().body(historicoService.getHistoricoUser(matricula).stream().map(this::toHistoricoSummaryModel).collect(Collectors.toList()));
+    }
+
+
     
     private ResponseHistoricoAllUserDTO toHistoricoSummaryModel(HistoricoPontos historicoPontos) { 
         return modelMapper.map(historicoPontos, ResponseHistoricoAllUserDTO.class);

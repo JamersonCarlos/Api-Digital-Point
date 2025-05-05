@@ -1,11 +1,17 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,14 +23,20 @@ public class LocaisTrabalho {
     private int id; 
 
     private String identificador;
-    private Double latitude; 
-    private Double longitude; 
-    private boolean localTrabalho;
+    @Column(nullable = false, columnDefinition = "DOUBLE DEFAULT 0.0")
+    private Double latitude = 0.0;
 
-    @ManyToOne
-    @JoinColumn(name = "setor_id") // nome da coluna que será a FK
-    private SetorDepartamento setorDepartamento;
+    @Column(nullable = false, columnDefinition = "DOUBLE DEFAULT 0.0")
+    private Double longitude = 0.0;
     
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean localTrabalho = false;
+
+
+    @ManyToMany(mappedBy = "locaisTrabalhos")
+    @JsonBackReference
+    private List<SetorDepartamento> setorDepartamento = new ArrayList<>();
+
     
     public LocaisTrabalho() {
     }
@@ -71,7 +83,17 @@ public class LocaisTrabalho {
 
     public void setLocalTrabalho(boolean localTrabalho) {
         this.localTrabalho = localTrabalho;
-    } 
+    }
+
+    public void setSetorDepartamento(List<SetorDepartamento> setorDepartamento) {
+        this.setorDepartamento = setorDepartamento;
+    }
+
+    public List<SetorDepartamento> getSetorDepartamento() {
+        return this.setorDepartamento;
+    }
+
+    
     
     
 
