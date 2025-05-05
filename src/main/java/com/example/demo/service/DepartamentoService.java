@@ -11,7 +11,6 @@ import com.example.demo.VOs.SetorDepartamentoVO;
 import com.example.demo.model.Departamento;
 import com.example.demo.model.SetorDepartamento;
 import com.example.demo.repository.DepartamentoRepository;
-import com.example.demo.repository.FuncionarioRepository;
 import com.example.demo.repository.SetorDepartamentoRepository;
 
 @Service
