@@ -36,6 +36,16 @@ public class SetorDepartamentoVO {
                 this.locaisTrabalhos = locaisTrabalhos;
         }
 
+        
+
+        public Funcionario getChefe() {
+            return chefe;
+        }
+
+        public void setChefe(Funcionario chefe) {
+            this.chefe = chefe;
+        }
+
         public List<Funcionario> getFuncionarios() {
                 return funcionarios;
         }
@@ -44,14 +54,7 @@ public class SetorDepartamentoVO {
                 this.funcionarios = funcionarios;
         }
 
-        public Funcionario getChefe() {
-            return chefe;
-        }
-
-        public void setChefe(Funcionario chefe) {
-            this.chefe = chefe;
-        } 
-
+        
         
         
 }
