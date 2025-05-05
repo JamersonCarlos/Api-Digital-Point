@@ -3,15 +3,16 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Departamento;
 import com.example.demo.model.Funcionario;
+import com.example.demo.model.LocaisTrabalho;
 import com.example.demo.model.SetorDepartamento;
 import com.example.demo.repository.DepartamentoRepository;
 import com.example.demo.repository.FuncionarioRepository;
+import com.example.demo.repository.LocaisTrabalhoRepository;
 import com.example.demo.repository.SetorDepartamentoRepository;
 
 
@@ -28,7 +29,7 @@ public class SetoresService {
         FuncionarioRepository funcionarioRepository; 
 
         @Autowired
-        private ModelMapper modelMapper = new ModelMapper(); 
+        LocaisTrabalhoRepository locaisTrabalhoRepository;
 
         public List<SetorDepartamento> getAllSetores(int idDepartamento) { 
                 return setorDepartamentoRepository.findByDepartamentoId(idDepartamento);
@@ -36,7 +37,16 @@ public class SetoresService {
 
         public void novoSetor(int idDepartamento, String nomeSetor) { 
                 Optional<Departamento> departamento = departamentoRepository.findById(idDepartamento); 
-                SetorDepartamento newSetorDepartamento = new SetorDepartamento(nomeSetor, departamento.get()); 
+                SetorDepartamento newSetorDepartamento = new SetorDepartamento(nomeSetor, departamento.get());
+                List<LocaisTrabalho> locaisDisponiveis = locaisTrabalhoRepository.findLocaisSemSetores(); // você terá que criar este método com @Query
+
+                // Relacionamento bidirecional
+                for (LocaisTrabalho local : locaisDisponiveis) {
+                        local.getSetorDepartamento().add(newSetorDepartamento); // adiciona o setor ao local
+                }
+
+                newSetorDepartamento.setLocaisTrabalhos(locaisDisponiveis); 
+
                 if(departamento.isPresent()) { 
                         setorDepartamentoRepository.save(newSetorDepartamento);
                 }
