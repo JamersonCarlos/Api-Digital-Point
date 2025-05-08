@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import java.util.Collection;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +22,7 @@ import com.example.demo.dto.ErrorResponseDTO;
 import com.example.demo.dto.LoginResponseDTO;
 import com.example.demo.dto.RegisterDTO;
 import com.example.demo.dto.ValidateTokenDTO;
+import com.example.demo.exception.NotAcessRoleException;
 import com.example.demo.exception.NotRegisterMatriculaUser;
 import com.example.demo.exception.TokenInvalidException;
 import com.example.demo.exception.UserAlreadyExistsException;
@@ -61,9 +66,18 @@ public class AuthenticationController {
     public ResponseEntity<?> loginAdmin(@RequestBody AuthenticationAdminDTO data) { 
         try {
             var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
-            var auth = this.authenticationManager.authenticate(usernamePassword);
-            var token = tokenService.generateToken((User) auth.getPrincipal());
-            return ResponseEntity.ok(new LoginResponseDTO(token));
+            var auth = this.authenticationManager.authenticate(usernamePassword); 
+            User user = (User) auth.getPrincipal();
+            Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+
+            boolean isAdmin = authorities.stream()
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+
+            if (isAdmin) { 
+                var token = tokenService.generateToken((User) auth.getPrincipal());
+                return ResponseEntity.ok(new LoginResponseDTO(token));
+            }
+            throw new NotAcessRoleException("Você não é um empregador!");                                                      
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ErrorResponseDTO("Credenciais incorretas. Verifique seu telefone e senha."));

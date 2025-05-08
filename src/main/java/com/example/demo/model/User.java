@@ -115,4 +115,6 @@ public class User implements UserDetails {
         this.historicoPontos = historicoPontos;
     }
 
+
+
 }

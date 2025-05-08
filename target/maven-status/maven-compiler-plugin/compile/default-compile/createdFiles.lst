@@ -1,6 +1,7 @@
 com\example\demo\model\SolicitacoesUser.class
-com\example\demo\config\security\SecurityFilter.class
+com\example\demo\VOs\FuncionarioVO.class
 com\example\demo\dto\ErrorResponseDTO.class
+com\example\demo\service\UserService.class
 com\example\demo\controller\DepartamentoController.class
 com\example\demo\model\LocaisTrabalho.class
 com\example\demo\model\Departamento.class
@@ -18,6 +19,7 @@ com\example\demo\dto\BaterPontoDTO.class
 com\example\demo\dto\ResponseHistoricoAllUserDTO.class
 com\example\demo\service\AuthorizationService.class
 com\example\demo\VOs\DepartamentoVO.class
+com\example\demo\exception\MatriculaJaExisteException.class
 com\example\demo\service\SolicitacoesService.class
 com\example\demo\controller\AuthenticationController.class
 com\example\demo\service\DepartamentoService.class
@@ -27,11 +29,14 @@ com\example\demo\repository\SolicitacoesUserRepository.class
 com\example\demo\config\security\SecurityConfigurations.class
 com\example\demo\exception\NotRegisterMatriculaUser.class
 com\example\demo\model\SetorDepartamento.class
+com\example\demo\exception\NotAcessRoleException.class
 com\example\demo\config\security\TokenService.class
 com\example\demo\repository\UserRepository.class
 com\example\demo\service\HistoricoService.class
 com\example\demo\model\Funcionario.class
 com\example\demo\repository\HistoricoPontosRepository.class
+com\example\demo\VOs\RoleVO.class
+com\example\demo\VOs\SetorDepartamento2VO.class
 com\example\demo\VOs\SetorDepartamentoVO.class
 com\example\demo\controller\HistoricoController.class
 com\example\demo\model\HistoricoPontos.class
@@ -45,6 +50,7 @@ com\example\demo\dto\AuthenticationAdminDTO.class
 com\example\demo\dto\LoginResponseDTO.class
 com\example\demo\dto\SetorDTO.class
 com\example\demo\model\User.class
+com\example\demo\VOs\UserVO.class
 com\example\demo\service\FuncionarioService.class
 com\example\demo\exception\NotExistRelationalAndUserException.class
 com\example\demo\VOs\SolicitacaoVO.class

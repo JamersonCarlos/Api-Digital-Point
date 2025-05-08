@@ -40,7 +40,7 @@ public class HistoricoService {
     }
 
     public ResultBaterPontosVO baterPonto(String subject, BaterPontoDTO data) { 
-        Optional<User> userOpt = Optional.of(userRepository.findByLogin(subject));
+        Optional<User> userOpt = userRepository.findByLogin(subject);
         Optional<LocaisTrabalho> localOpt = locaisTrabalhoRepository.findById(data.localTrabalho());
 
         if(userOpt.isEmpty() || localOpt.isEmpty()) { 

@@ -34,10 +34,10 @@ public class SolicitacoesService {
         private ModelMapper modelMapper = new ModelMapper(); 
     
         public SolicitacaoVO abrirSolicitacao(SolicitacaoDTO solicitacao, String matricula) { 
-                final User user = userRepository.findByLogin(matricula);
+                final Optional<User> user = userRepository.findByLogin(matricula);
                 final Optional<HistoricoPontos> historicoPontos = historicoPontosRepository.findById(solicitacao.id_ponto());
                 if(historicoPontos.isPresent()) { 
-                        final SolicitacoesUser solicitacoesUser = new SolicitacoesUser(solicitacao.alterar_horario_entrada(), solicitacao.alterar_horario_saida(), solicitacao.novo_horario_entrada(), solicitacao.novo_horario_saida(), user, LocalDateTime.now(), historicoPontos.get());
+                        final SolicitacoesUser solicitacoesUser = new SolicitacoesUser(solicitacao.alterar_horario_entrada(), solicitacao.alterar_horario_saida(), solicitacao.novo_horario_entrada(), solicitacao.novo_horario_saida(), user.get(), LocalDateTime.now(), historicoPontos.get());
                         return modelMapper.map(solicitacoesUserRepository.save(solicitacoesUser), SolicitacaoVO.class);
                 }
                 return null; 
